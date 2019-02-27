@@ -1,0 +1,12 @@
+plugins {
+  id 'java'
+  id "com.katalon.gradle-plugin" version "0.0.4"
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile 'org.apache.poi:poi-ooxml:4.0.1'
+}
