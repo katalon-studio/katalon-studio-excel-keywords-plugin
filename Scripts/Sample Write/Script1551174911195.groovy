@@ -1,28 +1,30 @@
-import static com.kms.katalon.core.checkpoint.CheckpointFactory.findCheckpoint
-import static com.kms.katalon.core.testcase.TestCaseFactory.findTestCase
-import static com.kms.katalon.core.testdata.TestDataFactory.findTestData
-import static com.kms.katalon.core.testobject.ObjectRepository.findTestObject
-import com.kms.katalon.core.checkpoint.Checkpoint as Checkpoint
+import org.junit.Assert
+
 import com.kms.katalon.core.configuration.RunConfiguration as RunConfiguration
-import com.kms.katalon.core.cucumber.keyword.CucumberBuiltinKeywords as CucumberKW
-import com.kms.katalon.core.mobile.keyword.MobileBuiltInKeywords as Mobile
-import com.kms.katalon.core.model.FailureHandling as FailureHandling
-import com.kms.katalon.core.testcase.TestCase as TestCase
-import com.kms.katalon.core.testdata.TestData as TestData
-import com.kms.katalon.core.testobject.TestObject as TestObject
-import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
-import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
-import internal.GlobalVariable as GlobalVariable
 
 String filePath = (((RunConfiguration.getProjectDir() + File.separator) + 'output') + File.separator) + 'excel.xlsx'
 
-String sheetName = 'My First Sheet'
+String firstSheetName = 'My First Sheet'
 
-Object[][] data = [['Datatype', 'Example'], ['integer', 12345], ['float', 12345.12345], ['String', 'This is a string']
+Object[][] firstSheetData = [['Datatype', 'Example'], ['integer', 12345], ['float', 12345.12345], ['String', 'This is a string']
     , ['boolean', true], ['date', new Date()]]
 
-CustomKeywords.'com.katalon.plugin.keyword.excel.ExcelKeywords.writeToNewFile'(filePath, sheetName, data)
+CustomKeywords.'com.katalon.plugin.keyword.excel.ExcelKeywords.createFileAndAddSheet'(filePath, firstSheetName, firstSheetData)
 
-String newSheetName = 'My Second Sheet'
+String secondSheetName = 'My Second Sheet'
 
-CustomKeywords.'com.katalon.plugin.keyword.excel.ExcelKeywords.writeToNewSheet'(filePath, newSheetName, data)
+Object[][] secondSheetData = [['Datatype', 'Example', 'Another example'], ['integer', 12345, 67890], ['float', 12345.12345, 67890.67890]
+	, ['String', 'This is a string', 'This is another string'], ['boolean', true, false], ['date', new Date(), new Date()]
+	, ['Datatype', 'Example', 'Another example'], ['integer', 12345, 67890], ['float', 12345.12345, 67890.67890]
+	, ['String', 'This is a string', 'This is another string'], ['boolean', true, false], ['date', new Date(), new Date()]]
+
+CustomKeywords.'com.katalon.plugin.keyword.excel.ExcelKeywords.openFileAndAddSheet'(filePath, secondSheetName, secondSheetData)
+
+def actualRow = CustomKeywords.'com.katalon.plugin.keyword.excel.ExcelKeywords.readRow'(filePath, 1, 1)
+
+Object[] expectedRow = secondSheetData[1]
+for (int i = 0; i < expectedRow.length; i++) {
+	expectedRow[i] = expectedRow[i].toString()
+}
+
+Assert.assertArrayEquals(expectedRow, actualRow)
