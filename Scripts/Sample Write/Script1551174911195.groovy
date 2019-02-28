@@ -21,5 +21,8 @@ String sheetName = 'My First Sheet'
 Object[][] data = [['Datatype', 'Example'], ['integer', 12345], ['float', 12345.12345], ['String', 'This is a string']
     , ['boolean', true], ['date', new Date()]]
 
-CustomKeywords.'com.katalon.plugin.keyword.excel.ExcelKeywords.write'(filePath, sheetName, data)
+CustomKeywords.'com.katalon.plugin.keyword.excel.ExcelKeywords.writeToNewFile'(filePath, sheetName, data)
 
+String newSheetName = 'My Second Sheet'
+
+CustomKeywords.'com.katalon.plugin.keyword.excel.ExcelKeywords.writeToNewSheet'(filePath, newSheetName, data)
