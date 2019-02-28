@@ -7,3 +7,7 @@ Drivers/*.jar
 Reports
 
 Libs
+
+output
+
+!output/.gitkeep

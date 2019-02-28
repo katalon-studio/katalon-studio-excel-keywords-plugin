@@ -18,7 +18,7 @@ String filePath = (((RunConfiguration.getProjectDir() + File.separator) + 'outpu
 
 String sheetName = 'My First Sheet'
 
-Object[][] data = [['Datatype', 'Example'], ['integer', 2], ['float', 2.1], ['String', 'This is a string']
+Object[][] data = [['Datatype', 'Example'], ['integer', 12345], ['float', 12345.12345], ['String', 'This is a string']
     , ['boolean', true], ['date', new Date()]]
 
 CustomKeywords.'com.katalon.plugin.keyword.excel.ExcelKeywords.write'(filePath, sheetName, data)
