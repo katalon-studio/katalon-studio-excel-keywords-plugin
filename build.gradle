@@ -1,12 +1,33 @@
 plugins {
   id 'java'
-  id "com.katalon.gradle-plugin" version "0.0.4"
+  id 'groovy'
+  id 'com.github.johnrengelman.shadow' version '4.0.4'
+  id "com.katalon.gradle-plugin" version "0.0.5"
 }
 
 repositories {
+  jcenter()
   mavenCentral()
+}
+
+sourceSets {
+    main {
+        groovy {
+            srcDirs = ['Keywords']
+            srcDir 'Libs'
+        }
+    }
+}
+
+compileJava {
+    options.compilerArgs += ["-parameters"]
 }
 
 dependencies {
   compile 'org.apache.poi:poi-ooxml:4.0.1'
+}
+
+katalon {
+    dependencyPrefix = ""
+    minimize = false
 }
