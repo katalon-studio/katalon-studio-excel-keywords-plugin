@@ -16,7 +16,7 @@ import com.kms.katalon.core.util.KeywordUtil
 class ExcelKeywords {
 	
 	@Keyword
-	def createFileAndAddSheet(String filePath, String sheetName, Object[][] rowsData) {
+	def createFileAndAddSheet(String filePath, String sheetName, List<List<Object>> rowsData) {
 
 		XSSFWorkbook workbook = new XSSFWorkbook()
 
@@ -34,7 +34,7 @@ class ExcelKeywords {
 	}
 
 	@Keyword
-	def openFileAndAddSheet(String filePath, String sheetName, Object[][] rowsData) {
+	def openFileAndAddSheet(String filePath, String sheetName, List<List<Object>> rowsData) {
 		
 		InputStream inputStream;
 		
@@ -80,7 +80,7 @@ class ExcelKeywords {
 			rowData.add(cellValue)
 		}
 		
-		return rowData.toArray()
+		return rowData;
 	}
 
 	private writeWorkbookToFile(XSSFWorkbook workbook, File file) {
@@ -107,20 +107,20 @@ class ExcelKeywords {
 		cell.setCellStyle(cellStyle)
 	}
 
-	private void addSheetAndWriteData(XSSFWorkbook workbook, String sheetName, Object[][] rowsData) {
+	private void addSheetAndWriteData(XSSFWorkbook workbook, String sheetName, List<List<Object>> rowsData) {
 		KeywordUtil.logInfo('Creating sheet ' + sheetName)
 		XSSFSheet sheet = workbook.createSheet(sheetName)
 
 		KeywordUtil.logInfo('Adding rows')
 		int rowNum = 0
 
-		for (Object[] rowData : rowsData) {
+		for (List<Object> rowData : rowsData) {
 			addRow(workbook, sheet, rowNum, rowData)
 			rowNum++
 		}
 	}
 
-	private void addRow(XSSFWorkbook workbook, XSSFSheet sheet, int rowNum, Object[] rowData) {
+	private void addRow(XSSFWorkbook workbook, XSSFSheet sheet, int rowNum, List<Object> rowData) {
 		Row row = sheet.createRow(rowNum)
 		int colNum = 0;
 		for (Object field : rowData) {
