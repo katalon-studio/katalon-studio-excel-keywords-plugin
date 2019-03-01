@@ -1,8 +1,8 @@
-pluginManagement {
-  repositories {
-      maven {
-        url '../consuming/maven-repo'
-      }
-      gradlePluginPortal()
-  }
-}
+// pluginManagement {
+//   repositories {
+//       maven {
+//         url '../consuming/maven-repo'
+//       }
+//       gradlePluginPortal()
+//   }
+// }
