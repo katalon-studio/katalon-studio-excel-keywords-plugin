@@ -11,3 +11,4 @@ Libs
 output
 
 !output/.gitkeep
+/build
