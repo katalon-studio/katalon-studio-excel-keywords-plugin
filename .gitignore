@@ -12,3 +12,5 @@ output
 
 !output/.gitkeep
 /build
+
+.classpath
