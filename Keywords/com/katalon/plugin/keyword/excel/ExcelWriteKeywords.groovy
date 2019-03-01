@@ -13,8 +13,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import com.kms.katalon.core.annotation.Keyword
 import com.kms.katalon.core.util.KeywordUtil
 
-class ExcelKeywords {
-	
+class ExcelWriteKeywords {
+
 	@Keyword
 	def createFileAndAddSheet(String filePath, String sheetName, List<List<Object>> rowsData) {
 
@@ -29,58 +29,31 @@ class ExcelKeywords {
 			KeywordUtil.logInfo('Creating a new file')
 			file.createNewFile()
 		}
-		
+
 		writeWorkbookToFile(workbook, file)
 	}
 
 	@Keyword
 	def openFileAndAddSheet(String filePath, String sheetName, List<List<Object>> rowsData) {
-		
+
 		InputStream inputStream;
-		
+
 		try {
-		
+
 			KeywordUtil.logInfo('Opening file ' + filePath)
-			
+
 			inputStream = new FileInputStream(filePath)
 			XSSFWorkbook workbook = WorkbookFactory.create(inputStream)
-	
+
 			addSheetAndWriteData(workbook, sheetName, rowsData)
-	
+
 			File file = new File(filePath)
-			
+
 			writeWorkbookToFile(workbook, file)
-		
 		} finally {
-		
+
 			inputStream.close()
 		}
-	}
-	
-	@Keyword
-	def readRow(String filePath, int sheetIndex, int rowIndex) {
-		
-		List<String> rowData = new ArrayList<String>();
-		
-		File file = new File(filePath)
-		Workbook workbook = WorkbookFactory.create(file);
-		
-		Sheet sheet = workbook.getSheetAt(sheetIndex);
-
-		DataFormatter dataFormatter = new DataFormatter();
-
-		Row row = sheet.getRow(rowIndex)
-		
-		if (row == null) {
-			return null
-		}
-		
-		for (Cell cell : row) {
-			String cellValue = dataFormatter.formatCellValue(cell);
-			rowData.add(cellValue)
-		}
-		
-		return rowData;
 	}
 
 	private writeWorkbookToFile(XSSFWorkbook workbook, File file) {
@@ -93,13 +66,13 @@ class ExcelKeywords {
 			outputStream.close()
 		}
 	}
-	
+
 	private void setCellStyle(XSSFWorkbook workbook, Cell cell, short dataFormat) {
 		CellStyle cellStyle = workbook.createCellStyle()
 		cellStyle.setDataFormat(dataFormat)
 		cell.setCellStyle(cellStyle)
 	}
-	
+
 	private void setCellStyle(XSSFWorkbook workbook, Cell cell, String dataFormat) {
 		DataFormat format = workbook.createDataFormat();
 		CellStyle cellStyle = workbook.createCellStyle()

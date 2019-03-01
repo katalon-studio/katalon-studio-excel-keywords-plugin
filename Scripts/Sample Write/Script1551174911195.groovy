@@ -9,7 +9,7 @@ String firstSheetName = 'My First Sheet'
 List<List<Object>> firstSheetData = [['Datatype', 'Example'], ['integer', 12345], ['float', 12345.12345], ['String', 'This is a string']
     , ['boolean', true], ['date', new Date()]]
 
-CustomKeywords.'com.katalon.plugin.keyword.excel.ExcelKeywords.createFileAndAddSheet'(filePath, firstSheetName, firstSheetData)
+CustomKeywords.'com.katalon.plugin.keyword.excel.ExcelWriteKeywords.createFileAndAddSheet'(filePath, firstSheetName, firstSheetData)
 
 String secondSheetName = 'My Second Sheet'
 
@@ -18,9 +18,9 @@ List<List<Object>> secondSheetData = [['Datatype', 'Example', 'Another example']
 	, ['Datatype', 'Example', 'Another example'], ['integer', 12345, 67890], ['float', 12345.12345, 67890.67890]
 	, ['String', 'This is a string', 'This is another string'], ['boolean', true, false], ['date', new Date(), new Date()]]
 
-CustomKeywords.'com.katalon.plugin.keyword.excel.ExcelKeywords.openFileAndAddSheet'(filePath, secondSheetName, secondSheetData)
+CustomKeywords.'com.katalon.plugin.keyword.excel.ExcelWriteKeywords.openFileAndAddSheet'(filePath, secondSheetName, secondSheetData)
 
-def actualRow = CustomKeywords.'com.katalon.plugin.keyword.excel.ExcelKeywords.readRow'(filePath, 1, 1)
+def actualRow = CustomKeywords.'com.katalon.plugin.keyword.excel.ExcelReadKeywords.readRow'(filePath, 1, 1)
 
 List<Object> expectedRow = secondSheetData[1]
 for (int i = 0; i < expectedRow.size(); i++) {
