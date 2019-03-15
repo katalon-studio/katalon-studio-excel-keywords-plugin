@@ -11,15 +11,19 @@ repositories {
 }
 
 sourceSets {
-    main {
-        groovy {
-            srcDirs = ['Keywords', 'Include/scripts/groovy']
-            srcDir 'Libs'
-        }
+  main {
+    groovy {
+      srcDirs = ['Keywords', 'Include/scripts/groovy']
+      srcDir 'Libs'
     }
+  }
+}
+
+jar {
+  exclude 'Temp*.class'
 }
 
 katalon {
-    dependencyPrefix = "com.katalon"
-    minimize = false
+  dependencyPrefix = "com.katalon"
+  minimize = false
 }
