@@ -19,7 +19,7 @@ sourceSets {
   }
 }
 
-jar {
+shadowJar {
   exclude 'Temp*.class'
 }
 
